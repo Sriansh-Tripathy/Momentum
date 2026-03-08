@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useReducer, useEffect, useMemo, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { createUserStorage } from '../utils/storage';
+import React, { createContext, useContext, useReducer, useEffect, useMemo } from 'react';
+import { supabase } from '../supabaseClient';
 import { useAuth } from './AuthContext';
 
 const BankContext = createContext();
@@ -35,39 +34,45 @@ export const DEPOSIT_CATEGORIES = [
 export function BankProvider({ children }) {
     const { currentUser } = useAuth();
     const [state, dispatch] = useReducer(bankReducer, initialState);
-    const [userStorage, setUserStorage] = useState(null);
 
     useEffect(() => {
         if (currentUser) {
-            const stor = createUserStorage(currentUser.id);
-            setUserStorage(stor);
-            stor.get('bank_deposits', []).then(data => {
-                dispatch({ type: 'SET_DEPOSITS', payload: data });
-            });
+            const fetchDeposits = async () => {
+                const { data, error } = await supabase.from('deposits')
+                    .select('*')
+                    .eq('user_id', currentUser.id)
+                    .order('created_at', { ascending: false });
+                if (data && !error) {
+                    dispatch({ type: 'SET_DEPOSITS', payload: data });
+                } else {
+                    dispatch({ type: 'SET_DEPOSITS', payload: [] });
+                }
+            };
+            fetchDeposits();
         } else {
-            setUserStorage(null);
             dispatch({ type: 'SET_DEPOSITS', payload: [] });
         }
     }, [currentUser]);
 
-    useEffect(() => {
-        if (!state.isLoading && userStorage) {
-            userStorage.set('bank_deposits', state.deposits);
-        }
-    }, [state.deposits, state.isLoading, userStorage]);
-
-    const addDeposit = (deposit) => {
+    const addDeposit = async (deposit) => {
+        if (!currentUser) return;
         const newDeposit = {
-            ...deposit,
-            id: uuidv4(),
             amount: parseFloat(deposit.amount),
-            createdAt: new Date().toISOString(),
+            category: deposit.category,
+            date: deposit.date,
+            label: deposit.label,
+            note: deposit.note,
+            user_id: currentUser.id
         };
-        dispatch({ type: 'ADD_DEPOSIT', payload: newDeposit });
+        const { data, error } = await supabase.from('deposits').insert([newDeposit]).select();
+        if (data && !error) {
+            dispatch({ type: 'ADD_DEPOSIT', payload: data[0] });
+        }
     };
 
-    const deleteDeposit = (id) => {
+    const deleteDeposit = async (id) => {
         dispatch({ type: 'DELETE_DEPOSIT', payload: id });
+        await supabase.from('deposits').delete().eq('id', id);
     };
 
     // Balance is COMPUTED from deposits — not editable; auto-syncs with ExpenseContext

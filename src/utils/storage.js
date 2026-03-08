@@ -1,36 +1,50 @@
 import localforage from 'localforage';
+import { supabase } from '../supabaseClient';
 
 localforage.config({
     name: 'Momentum',
     storeName: 'data'
 });
 
-// A wrapper that scopes storage keys to a specific user
+// A wrapper that scopes storage keys to a specific user and syncs with Supabase JSON Key/Value
 export const createUserStorage = (userId) => {
-    const getKey = (key) => `${userId}_${key}`;
-
     return {
         async get(key, defaultValue) {
             try {
-                const value = await localforage.getItem(getKey(key));
-                return value !== null ? value : defaultValue;
+                const { data, error } = await supabase
+                    .from('user_data')
+                    .select('value')
+                    .eq('user_id', userId)
+                    .eq('key', key)
+                    .single();
+
+                if (error || !data) {
+                    // Supabase will throw error code PGRST116 if no rows returned based on .single()
+                    return defaultValue;
+                }
+                return data.value !== null ? data.value : defaultValue;
             } catch (err) {
-                console.error(`Error reading ${getKey(key)}:`, err);
+                console.error(`Error reading ${key} from Supabase:`, err);
                 return defaultValue;
             }
         },
 
         async set(key, value) {
             try {
-                await localforage.setItem(getKey(key), value);
+                await supabase
+                    .from('user_data')
+                    .upsert({ user_id: userId, key, value });
             } catch (err) {
-                console.error(`Error writing ${getKey(key)}:`, err);
+                console.error(`Error writing ${key} to Supabase:`, err);
             }
         },
 
         async clear() {
-            // Can't use localforage.clear() as it wipes ALL users. 
-            // In a real app we'd iterate keys starting with userId_.
+            try {
+                await supabase.from('user_data').delete().eq('user_id', userId);
+            } catch (err) {
+                console.error('Error clearing data from Supabase:', err);
+            }
         }
     };
 };

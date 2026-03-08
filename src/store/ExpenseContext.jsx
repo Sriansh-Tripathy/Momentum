@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { createUserStorage } from '../utils/storage';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { supabase } from '../supabaseClient';
 import { useAuth } from './AuthContext';
 
 const ExpenseContext = createContext();
@@ -31,47 +30,51 @@ function expenseReducer(state, action) {
 export function ExpenseProvider({ children }) {
     const { currentUser } = useAuth();
     const [state, dispatch] = useReducer(expenseReducer, initialState);
-    const [userStorage, setUserStorage] = useState(null);
 
-    // Setup user storage when current user changes
+    // Load from Supabase
     useEffect(() => {
         if (currentUser) {
-            const stor = createUserStorage(currentUser.id);
-            setUserStorage(stor);
-
-            // Load user data
-            stor.get('expenses', []).then(data => {
-                dispatch({ type: 'SET_EXPENSES', payload: data });
-            });
+            const fetchExpenses = async () => {
+                const { data, error } = await supabase.from('expenses')
+                    .select('*')
+                    .eq('user_id', currentUser.id)
+                    .order('created_at', { ascending: false });
+                if (data && !error) {
+                    dispatch({ type: 'SET_EXPENSES', payload: data });
+                } else {
+                    dispatch({ type: 'SET_EXPENSES', payload: [] });
+                }
+            };
+            fetchExpenses();
         } else {
-            // Reset when logged out
-            setUserStorage(null);
             dispatch({ type: 'SET_EXPENSES', payload: [] });
         }
     }, [currentUser]);
 
-    // Save to localforage when expenses change (and we have a storage instance)
-    useEffect(() => {
-        if (!state.isLoading && userStorage) {
-            userStorage.set('expenses', state.expenses);
-        }
-    }, [state.expenses, state.isLoading, userStorage]);
-
-    const addExpense = (expense) => {
+    const addExpense = async (expense) => {
+        if (!currentUser) return;
         const newExpense = {
-            ...expense,
-            id: uuidv4(),
-            createdAt: new Date().toISOString()
+            amount: parseFloat(expense.amount),
+            category: expense.category,
+            date: expense.date,
+            label: expense.label,
+            user_id: currentUser.id
         };
-        dispatch({ type: 'ADD_EXPENSE', payload: newExpense });
+        const { data, error } = await supabase.from('expenses').insert([newExpense]).select();
+        if (data && !error) {
+            dispatch({ type: 'ADD_EXPENSE', payload: data[0] });
+        }
     };
 
-    const deleteExpense = (id) => {
+    const deleteExpense = async (id) => {
         dispatch({ type: 'DELETE_EXPENSE', payload: id });
+        await supabase.from('expenses').delete().eq('id', id);
     };
 
-    const updateExpense = (expense) => {
+    const updateExpense = async (expense) => {
         dispatch({ type: 'UPDATE_EXPENSE', payload: expense });
+        const { id, user_id, created_at, ...updates } = expense;
+        await supabase.from('expenses').update(updates).eq('id', id);
     };
 
     return (
