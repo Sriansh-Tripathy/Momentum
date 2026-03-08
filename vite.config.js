@@ -31,5 +31,22 @@ export default defineConfig({
         ]
       }
     })
-  ]
+  ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('@supabase')) return 'vendor-supabase';
+            if (id.includes('chart.js') || id.includes('react-chartjs-2')) return 'vendor-charts';
+            if (id.includes('xlsx')) return 'vendor-xlsx';
+            if (id.includes('framer-motion')) return 'vendor-framer';
+            if (id.includes('lucide-react')) return 'vendor-icons';
+            return 'vendor'; // all other node_modules go here
+          }
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
+  }
 });
