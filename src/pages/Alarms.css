@@ -1,0 +1,145 @@
+.alarms-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    height: 100%;
+}
+
+.border-warning {
+    border-color: var(--color-warning);
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.mb-4 {
+    margin-bottom: var(--spacing-4);
+}
+
+.mt-4 {
+    margin-top: var(--spacing-4);
+}
+
+.mt-6 {
+    margin-top: var(--spacing-6);
+}
+
+.mr-2 {
+    margin-right: var(--spacing-2);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.budget-input-group {
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: flex-end;
+}
+
+.budget-input-group>div {
+    flex: 1;
+}
+
+.budget-status {
+    padding: var(--spacing-2);
+    background: var(--color-bg-base);
+    border-radius: var(--radius-sm);
+    font-size: 1.1rem;
+}
+
+.alarms-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    padding-bottom: 80px;
+}
+
+.alarm-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-4);
+    border: 2px solid var(--color-border);
+    transition: opacity 0.3s;
+}
+
+.alarm-item.inactive {
+    opacity: 0.5;
+}
+
+.alarm-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.alarm-time {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: var(--spacing-1);
+}
+
+.alarm-title {
+    font-size: 1rem;
+}
+
+.alarm-days {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.alarm-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-2);
+}
+
+.time-input {
+    font-family: var(--font-brand);
+    font-size: 2rem;
+    text-align: center;
+    letter-spacing: 0.1em;
+}
+
+/* Day Selector */
+.days-selector {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-1);
+    margin-top: var(--spacing-2);
+}
+
+.day-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+    border: 2px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.day-btn:hover {
+    border-color: var(--color-text-primary);
+    color: var(--color-text-primary);
+}
+
+.day-btn.active {
+    background: var(--color-text-primary);
+    color: var(--color-bg-base);
+    border-color: var(--color-text-primary);
+}

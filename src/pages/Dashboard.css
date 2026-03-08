@@ -1,0 +1,327 @@
+.dashboard-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    height: 100%;
+}
+
+/* === BALANCE CARD === */
+.balance-card {
+    background-color: var(--color-text-primary);
+    color: var(--color-bg-base);
+    border: 2px solid var(--color-text-primary);
+    padding: var(--spacing-8);
+    position: relative;
+    overflow: hidden;
+}
+
+.balance-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 55%;
+    background-image: radial-gradient(var(--color-bg-base) 1px, transparent 1px);
+    background-size: 16px 16px;
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+.balance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-2);
+    position: relative;
+    z-index: 2;
+}
+
+.balance-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    opacity: 0.7;
+}
+
+.balance-amount {
+    font-size: 3rem;
+    line-height: 1.1;
+    position: relative;
+    z-index: 2;
+    margin-bottom: var(--spacing-3);
+}
+
+.balance-amount.text-negative {
+    color: #ff6b6b;
+}
+
+.balance-stats {
+    display: flex;
+    gap: var(--spacing-6);
+    position: relative;
+    z-index: 2;
+}
+
+.balance-stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    opacity: 0.85;
+}
+
+.stat-icon {
+    flex-shrink: 0;
+}
+
+.stat-green {
+    color: #4ade80;
+}
+
+.stat-red {
+    color: #f87171;
+}
+
+/* === QUICK STATS GRID === */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3);
+}
+
+.stat-card {
+    background-color: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+    padding: var(--spacing-4);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.stat-card:hover {
+    background-color: var(--color-text-primary);
+    color: var(--color-bg-base);
+}
+
+.stat-card:hover .text-secondary,
+.stat-card:hover .text-red {
+    color: inherit !important;
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--spacing-1);
+    color: var(--color-text-secondary);
+}
+
+.stat-card:hover .stat-label {
+    color: inherit;
+    opacity: 0.7;
+}
+
+.stat-value {
+    font-size: 1.6rem;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.stat-sub {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+}
+
+/* === BUDGET METER === */
+.budget-meter-card {
+    background-color: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+    padding: var(--spacing-4);
+}
+
+.budget-meter-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--spacing-3);
+}
+
+.budget-meter {
+    height: 10px;
+    background-color: var(--color-bg-base);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    margin-bottom: var(--spacing-2);
+}
+
+.budget-meter-fill {
+    height: 100%;
+    background-color: var(--color-text-primary);
+    transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.budget-meter-fill.budget-over {
+    background-color: var(--color-accent-red);
+}
+
+.budget-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+}
+
+/* === QUICK ACTIONS === */
+.quick-actions {
+    display: flex;
+    gap: var(--spacing-3);
+}
+
+.quick-actions .nothing-btn {
+    flex: 1;
+}
+
+/* === TRANSACTION FEED === */
+.transaction-feed {
+    background-color: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+}
+
+.feed-header {
+    padding: var(--spacing-3) var(--spacing-4);
+    border-bottom: 2px solid var(--color-border);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+}
+
+.feed-empty {
+    padding: var(--spacing-8) var(--spacing-4);
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+.feed-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background 0.15s;
+}
+
+.feed-item:last-child {
+    border-bottom: none;
+}
+
+.feed-item:hover {
+    background-color: var(--color-bg-base);
+}
+
+.feed-icon {
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.feed-deposit .feed-icon {
+    border-color: #16a34a;
+    color: #16a34a;
+}
+
+.feed-expense .feed-icon {
+    border-color: var(--color-accent-red);
+    color: var(--color-accent-red);
+}
+
+.feed-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.feed-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+}
+
+.feed-date {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+    text-transform: uppercase;
+}
+
+.feed-amount {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.amount-green {
+    color: #16a34a;
+}
+
+.amount-red {
+    color: var(--color-accent-red);
+}
+
+.feed-delete {
+    background: transparent;
+    border: none;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s;
+    flex-shrink: 0;
+}
+
+.feed-delete:hover {
+    color: var(--color-accent-red);
+}
+
+/* === ICON BUTTON === */
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: inherit;
+    opacity: 0.7;
+    cursor: pointer;
+    padding: var(--spacing-1);
+    transition: opacity 0.2s;
+    position: relative;
+    z-index: 2;
+}
+
+.icon-btn:hover {
+    opacity: 1;
+}
+
+/* === MISC === */
+.text-negative {
+    color: #ef4444;
+}
+
+.text-red {
+    color: var(--color-accent-red) !important;
+}
+
+/* Form styles shared with expenses */
+.expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.w-full {
+    width: 100%;
+}
+
+.mt-4 {
+    margin-top: var(--spacing-4);
+}

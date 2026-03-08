@@ -1,0 +1,39 @@
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  padding: var(--spacing-4);
+  overflow-y: auto;
+  padding-bottom: calc(var(--nav-height) + var(--spacing-4));
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    padding: var(--spacing-8);
+    padding-left: calc(var(--sidebar-width) + var(--spacing-8));
+    padding-bottom: var(--spacing-8);
+  }
+}
+
+/* Typography styles inside app */
+.page-title {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-6);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.page-title::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-accent-red);
+  border-radius: 2px;
+}

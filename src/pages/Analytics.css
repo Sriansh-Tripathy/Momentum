@@ -1,0 +1,342 @@
+.analytics-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    padding-bottom: 32px;
+}
+
+/* === SUB-PAGE TAB SWITCHER === */
+.analytics-tabs {
+    display: flex;
+    border: 2px solid var(--color-border);
+    overflow: hidden;
+}
+
+.analytics-tab {
+    flex: 1;
+    padding: var(--spacing-2) 0;
+    background: var(--color-bg-card);
+    border: none;
+    border-right: 2px solid var(--color-border);
+    font-family: var(--font-brand);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.analytics-tab:last-child {
+    border-right: none;
+}
+
+.analytics-tab--active {
+    background: var(--color-text-primary);
+    color: var(--color-bg-base);
+}
+
+/* === HEATMAP === */
+.heatmap-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) 0;
+}
+
+.heatmap-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.heatmap-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    width: 110px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.heatmap-cells {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+}
+
+.heatmap-cell {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-base);
+    flex-shrink: 0;
+}
+
+.heatmap-cell--done {
+    background: var(--color-text-primary);
+    border-color: var(--color-text-primary);
+}
+
+
+/* === ML PREDICTION BANNER === */
+.prediction-banner {
+    background: var(--color-text-primary);
+    color: var(--color-bg-base);
+    border: 2px solid var(--color-text-primary);
+    padding: var(--spacing-6);
+    position: relative;
+    overflow: hidden;
+}
+
+.prediction-banner--danger {
+    background: var(--color-accent-red);
+    border-color: var(--color-accent-red);
+}
+
+.prediction-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    opacity: 0.7;
+    margin-bottom: var(--spacing-1);
+}
+
+.prediction-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: var(--spacing-3);
+}
+
+.prediction-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.25);
+    margin-bottom: var(--spacing-2);
+}
+
+.prediction-bar-fill {
+    height: 100%;
+    background: white;
+    transition: width 0.6s ease;
+}
+
+.prediction-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    opacity: 0.8;
+}
+
+/* === STATS ROW === */
+.analytics-stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3);
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-1);
+}
+
+.total-amount {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+/* === CHART CARDS === */
+.chart-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-4);
+    border: 2px solid var(--color-border);
+    background: var(--color-bg-card);
+}
+
+.chart-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--spacing-4);
+    padding-bottom: var(--spacing-2);
+    border-bottom: 2px solid var(--color-border);
+}
+
+.chart-container {
+    position: relative;
+    height: 180px;
+    width: 100%;
+}
+
+.bar-container {
+    height: 180px;
+}
+
+/* === CATEGORY TABLE === */
+.category-table {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-3);
+}
+
+.cat-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.cat-info {
+    width: 80px;
+    flex-shrink: 0;
+}
+
+.cat-name {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cat-bar-wrap {
+    flex: 1;
+    height: 8px;
+    background: var(--color-bg-base);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+}
+
+.cat-actual-bar {
+    height: 100%;
+    background: var(--color-text-primary);
+    transition: width 0.5s;
+    max-width: 120%;
+}
+
+.cat-amounts {
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 120px;
+    text-align: right;
+}
+
+.text-red {
+    color: var(--color-accent-red) !important;
+}
+
+/* === ACTIVITY STATS === */
+.act-stat-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-2) 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.act-stat-row:last-child {
+    border-bottom: none;
+}
+
+.act-stat-info {
+    width: 120px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.act-stat-icon {
+    font-size: 1.1rem;
+}
+
+.act-streak {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: 6px;
+    color: #f59e0b;
+}
+
+/* Colour-coded completion bars */
+.bar-good {
+    background: #16a34a;
+}
+
+.bar-mid {
+    background: #f59e0b;
+}
+
+.bar-low {
+    background: var(--color-accent-red);
+}
+
+/* Colour-coded completion bars */
+.bar-good {
+    background: #16a34a;
+}
+
+.bar-mid {
+    background: #f59e0b;
+}
+
+.bar-low {
+    background: var(--color-accent-red);
+}
+
+/* === INSIGHTS TAB === */
+.insights-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    margin-top: var(--spacing-2);
+}
+
+.insight-card {
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-base);
+    padding: var(--spacing-3);
+}
+
+.insight-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--spacing-2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding-bottom: var(--spacing-2);
+}
+
+.insight-vs {
+    color: var(--color-text-tertiary);
+    font-size: 0.9rem;
+}
+
+.insight-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.insight-meaning {
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.insight-score {
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-1);
+}
+
+.text-green {
+    color: #16a34a;
+}

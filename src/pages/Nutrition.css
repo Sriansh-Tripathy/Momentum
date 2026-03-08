@@ -1,0 +1,170 @@
+.nutrition-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    padding-bottom: 32px;
+}
+
+.daily-selector {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.date-picker {
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    outline: none;
+    cursor: pointer;
+}
+
+.date-picker:focus {
+    border-color: var(--color-text-primary);
+}
+
+.nutrition-summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    padding: var(--spacing-6);
+}
+
+.net-calories-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-1);
+}
+
+.net-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--color-text-secondary);
+}
+
+.net-value {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.net-target {
+    font-size: 0.85rem;
+    color: var(--color-text-tertiary);
+}
+
+.calorie-progress-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.calorie-progress-bg {
+    height: 12px;
+    background: var(--color-bg-base);
+    border: 2px solid var(--color-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.calorie-progress-fill {
+    height: 100%;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fill-green {
+    background: #16a34a;
+}
+
+.fill-red {
+    background: var(--color-accent-red);
+}
+
+.calorie-meta {
+    text-align: right;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+}
+
+.nutrition-breakdown {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding-top: var(--spacing-4);
+    margin-top: var(--spacing-2);
+}
+
+.breakdown-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+}
+
+.breakdown-stat span {
+    opacity: 0.6;
+}
+
+.breakdown-stat strong {
+    font-size: 1.1rem;
+}
+
+/* Logging grid */
+.logging-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+}
+
+@media (min-width: 768px) {
+    .logging-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.logging-card {
+    gap: var(--spacing-4);
+}
+
+.preset-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: var(--spacing-2);
+}
+
+.preset-btn {
+    background: var(--color-bg-base);
+    border: 2px solid var(--color-border);
+    padding: var(--spacing-3) 0;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.preset-btn:hover {
+    background: var(--color-text-primary);
+    color: var(--color-bg-base);
+    border-color: var(--color-text-primary);
+}
+
+.preset-btn--burn:hover {
+    background: var(--color-accent-red);
+    color: var(--color-bg-base);
+    border-color: var(--color-accent-red);
+}
+
+.preset-btn:active {
+    transform: scale(0.95);
+}
+
+.manual-entry {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+.manual-entry input {
+    flex: 1;
+}

@@ -1,0 +1,38 @@
+.nothing-card {
+    background-color: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text-primary);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nothing-card.clickable {
+    cursor: pointer;
+}
+
+.nothing-card.clickable:hover {
+    border-color: var(--color-text-primary);
+    background-color: var(--color-bg-card-hover);
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 var(--color-border);
+}
+
+.padding-none {
+    padding: 0;
+}
+
+.padding-small {
+    padding: var(--spacing-3);
+}
+
+.padding-normal {
+    padding: var(--spacing-4);
+}
+
+.padding-large {
+    padding: var(--spacing-6);
+}
+
+/* Minimalist accent line on top removed matching mockup */

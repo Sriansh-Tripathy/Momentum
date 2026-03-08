@@ -1,0 +1,313 @@
+.payments-page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    padding-bottom: 100px;
+}
+
+/* === SUMMARY STRIP === */
+.payments-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 2px solid var(--color-border);
+    background: var(--color-bg-card);
+    overflow: hidden;
+}
+
+.ps-item {
+    padding: var(--spacing-3) var(--spacing-4);
+    border-right: 2px solid var(--color-border);
+    text-align: center;
+}
+
+.ps-item:last-child {
+    border-right: none;
+}
+
+.ps-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+}
+
+.ps-value {
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.ps-alert .ps-value {
+    color: var(--color-accent-red);
+}
+
+/* === PAYMENT LIST === */
+.payments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 2px solid var(--color-border);
+    overflow: hidden;
+}
+
+.payment-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    background: var(--color-bg-card);
+    border-left: 4px solid transparent;
+    transition: background 0.15s, border-color 0.2s;
+}
+
+.payment-item:last-child {
+    border-bottom: none;
+}
+
+.payment-item:hover {
+    background: var(--color-bg-base);
+}
+
+.payment-item--overdue {
+    border-left-color: var(--color-accent-red);
+    background: rgba(215, 25, 33, 0.04);
+}
+
+.payment-item--today {
+    border-left-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.04);
+}
+
+.payment-item--paid {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* === PAYMENT ICON === */
+.payment-icon {
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-text-secondary);
+}
+
+/* === PAYMENT DETAILS === */
+.payment-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.payment-name {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+}
+
+.payment-meta {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+}
+
+.payment-due {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    margin-bottom: 2px;
+}
+
+.payment-lastpaid {
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+/* === DUE BADGES === */
+.due-badge {
+    display: inline-block;
+    padding: 1px 6px;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    border: 1px solid var(--color-border);
+    background: transparent;
+}
+
+.due-overdue {
+    background: var(--color-accent-red);
+    color: white;
+    border-color: var(--color-accent-red);
+}
+
+.due-today {
+    background: #f59e0b;
+    color: black;
+    border-color: #f59e0b;
+}
+
+.due-soon {
+    background: var(--color-text-primary);
+    color: var(--color-bg-base);
+    border-color: var(--color-text-primary);
+}
+
+/* === RIGHT SIDE === */
+.payment-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-1);
+    flex-shrink: 0;
+}
+
+.payment-amount {
+    font-size: 1.1rem;
+    white-space: nowrap;
+}
+
+.payment-actions {
+    display: flex;
+    gap: var(--spacing-1);
+    align-items: center;
+}
+
+/* Pay / tick button */
+.pay-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-tertiary);
+    display: flex;
+    padding: 2px;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.pay-btn:hover {
+    color: #16a34a;
+    transform: scale(1.15);
+}
+
+.pay-btn--done {
+    color: #16a34a;
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.4);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    padding: 2px;
+    transition: color 0.2s;
+    display: flex;
+}
+
+.delete-btn:hover {
+    color: var(--color-accent-red);
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-10) var(--spacing-4);
+    border: 2px dashed var(--color-border);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+/* === FAB === */
+.fab {
+    position: fixed;
+    bottom: calc(var(--nav-height) + var(--spacing-4));
+    right: var(--spacing-4);
+    background-color: var(--color-text-primary);
+    color: var(--color-bg-base);
+    border: 3px solid var(--color-border);
+    border-radius: 0;
+    padding: var(--spacing-2) var(--spacing-5);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: 0.8rem;
+    font-family: var(--font-brand);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--color-border);
+    z-index: 90;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+@media (min-width: 768px) {
+    .fab {
+        bottom: var(--spacing-6);
+        right: var(--spacing-6);
+    }
+}
+
+.fab:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-border);
+}
+
+.fab:active {
+    transform: translate(0, 0);
+    box-shadow: 2px 2px 0 var(--color-border);
+}
+
+/* Form utilities */
+.expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.w-full {
+    width: 100%;
+}
+
+.mt-4 {
+    margin-top: var(--spacing-4);
+}
+
+.mb-2 {
+    margin-bottom: var(--spacing-2);
+}
+
+.nothing-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.nothing-label {
+    font-family: var(--font-brand);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary);
+}

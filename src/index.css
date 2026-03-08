@@ -1,0 +1,157 @@
+:root {
+  /* Colors (Light Theme) */
+  --color-bg-base: #f9fafb;
+  --color-bg-card: #ffffff;
+  --color-bg-card-hover: #f3f4f6;
+
+  --color-text-primary: #000000;
+  --color-text-secondary: #4b5563;
+  --color-text-tertiary: #9ca3af;
+
+  --color-accent-red: #ef4444;
+  --color-accent-red-hover: #dc2626;
+  --color-accent-red-glow: rgba(239, 68, 68, 0.15);
+
+  --color-border: #000000;
+  --color-border-focus: #ef4444;
+
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+
+  /* Typography */
+  --font-brand: 'Space Mono', monospace;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+
+  /* Radii (Sharp edges from mockup) */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-full: 9999px;
+
+  /* Shadows / Glows */
+  --shadow-glow: 0 0 20px var(--color-accent-red-glow);
+
+  /* Layout */
+  --nav-height: 64px;
+  --sidebar-width: 240px;
+}
+
+.dark {
+  /* Colors (Dark Theme) */
+  --color-bg-base: #111111;
+  --color-bg-card: #1a1a1a;
+  --color-bg-card-hover: #222222;
+
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #9ca3af;
+  --color-text-tertiary: #6b7280;
+
+  --color-border: #333333;
+  --color-border-focus: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Background dot matrix pattern for Nothing aesthetic */
+  background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+}
+
+/* Brand Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.brand-font {
+  font-family: var(--font-brand);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.numbers {
+  font-family: var(--font-brand);
+}
+
+/* Base Link */
+a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-accent-red);
+}
+
+/* Utilities */
+.text-red {
+  color: var(--color-accent-red);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.bg-card {
+  background-color: var(--color-bg-card);
+}
+
+.border {
+  border: 2px solid var(--color-border);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
